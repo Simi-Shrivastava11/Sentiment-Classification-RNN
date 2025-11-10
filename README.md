@@ -39,7 +39,7 @@ pip install -r requirements.txt
 │   └── plots/              # Generated plots
 ├── report.pdf              # Project report
 ├── requirements.txt        # Python dependencies
-└── README.md              # This file
+└── README.md               # This file
 ```
 
 ## Usage
