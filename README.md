@@ -33,7 +33,8 @@ pip install -r requirements.txt
 │   ├── preprocess.py       # Data preprocessing and tokenization
 │   ├── models.py           # RNN/LSTM/Bi-LSTM model architectures
 │   ├── train.py            # Model Training and metrics calculation 
-│   └── utils.py            # Utility functions (seed setting)
+│   ├── experiments.py      # Automated script to run all combinations of experiments
+│   └── utils.py            # Utility functions
 ├── results/
 │   ├── metrics.csv         # Experimental results
 │   └── plots/              # Generated plots
@@ -78,28 +79,12 @@ python src/train.py --arch rnn --activation sigmoid --optimizer sgd --seq_len 25
 ```
 
 ### 3. Running All Experiments
-To systematically test all configurations, run these commands:
+
+To systematically test all configurations, run this command:
 ```bash
-# Sequence length experiments
-python src/train.py --arch lstm --activation relu --optimizer adam --seq_len 25 --epochs 5
-python src/train.py --arch lstm --activation relu --optimizer adam --seq_len 50 --epochs 5
-python src/train.py --arch lstm --activation relu --optimizer adam --seq_len 100 --epochs 5
-
-# Architecture experiments
-python src/train.py --arch rnn --activation relu --optimizer adam --seq_len 50 --epochs 5
-python src/train.py --arch bi_lstm --activation relu --optimizer adam --seq_len 50 --epochs 5
-
-# Activation function experiments
-python src/train.py --arch lstm --activation tanh --optimizer adam --seq_len 50 --epochs 5
-python src/train.py --arch lstm --activation sigmoid --optimizer adam --seq_len 50 --epochs 5
-
-# Optimizer experiments
-python src/train.py --arch lstm --activation relu --optimizer sgd --seq_len 50 --epochs 5
-python src/train.py --arch lstm --activation relu --optimizer rmsprop --seq_len 50 --epochs 5
-
-# Gradient clipping experiment
-python src/train.py --arch lstm --activation relu --optimizer adam --seq_len 50 --epochs 5 --clip
+python src/experiments.py
 ```
+experiments.py script will systematically test all combinations of architectures, activations, optimizers, sequence lengths, and gradient clipping settings.
 
 ### 4. Generating Plots
 After training multiple models, generate comparison plots:
@@ -108,7 +93,9 @@ python src/evaluate.py
 ```
 
 This creates:
+
 - **results/plots/metrics_vs_seqlen.png** - Accuracy/F1 vs Sequence Length
+
 - **results/plots/loss_comparison.png** - Training Loss across 5 epochs: Best vs Worst Model
 
 ## Expected Runtime
@@ -118,7 +105,7 @@ All experiments use 5 epochs. Approximate times on CPU:
 - **seq_len=25**: ~0.6 minutes 
 - **seq_len=50**: ~1 minutes 
 - **seq_len=100**: ~2 minutes 
-- **Complete experiment suite**: ~12-15 minutes 
+- **Complete experiment suite**: ~50-60 minutes 
 
 ## Output Files
 

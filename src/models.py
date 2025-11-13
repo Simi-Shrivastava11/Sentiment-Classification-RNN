@@ -18,12 +18,11 @@ class SentimentModel(nn.Module):
         num_layers=2,          # number of RNN/LSTM layers
         dropout=0.5,           # dropout rate
         activation="relu",     # "relu", "tanh", or "sigmoid"
-        pad_idx=0,             # padding index
     ):
         super().__init__()
 
         # embedding layer converts word IDs into dense vectors
-        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=pad_idx)
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=0)
 
         # choosing the type of recurrent network
         if rnn_type == "rnn":
