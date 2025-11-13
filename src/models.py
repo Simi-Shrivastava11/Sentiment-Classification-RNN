@@ -3,10 +3,8 @@ import torch.nn as nn
 
 class SentimentModel(nn.Module):
     """
-    A simple sentiment classification model using RNN, LSTM, or Bi-LSTM.
-    Each review is passed through an embedding layer, an RNN-based network,
-    and finally a fully connected layer with sigmoid activation to output
-    the probability of the review being positive.
+    A simple sentiment classification model using RNN, LSTM, or Bi-LSTM. 
+    Each review is passed through an embedding layer, an RNN-based network, and finally a fully connected layer with sigmoid activation to output the probability of the review being positive.
     """
 
     def __init__(
@@ -26,34 +24,15 @@ class SentimentModel(nn.Module):
 
         # choosing the type of recurrent network
         if rnn_type == "rnn":
-            self.rnn = nn.RNN(
-                input_size=embedding_dim,
-                hidden_size=hidden_dim,
-                num_layers=num_layers,
-                batch_first=True,
-                dropout=dropout,
-            )
+            self.rnn = nn.RNN(input_size=embedding_dim, hidden_size=hidden_dim, num_layers=num_layers, batch_first=True, dropout=dropout,)
             self.bidirectional = False
 
         elif rnn_type == "lstm":
-            self.rnn = nn.LSTM(
-                input_size=embedding_dim,
-                hidden_size=hidden_dim,
-                num_layers=num_layers,
-                batch_first=True,
-                dropout=dropout,
-            )
+            self.rnn = nn.LSTM(input_size=embedding_dim, hidden_size=hidden_dim, num_layers=num_layers, batch_first=True, dropout=dropout,)
             self.bidirectional = False
 
         elif rnn_type == "bi_lstm":
-            self.rnn = nn.LSTM(
-                input_size=embedding_dim,
-                hidden_size=hidden_dim,
-                num_layers=num_layers,
-                batch_first=True,
-                dropout=dropout,
-                bidirectional=True,
-            )
+            self.rnn = nn.LSTM(input_size=embedding_dim, hidden_size=hidden_dim, num_layers=num_layers, batch_first=True, dropout=dropout, bidirectional=True,)
             self.bidirectional = True
 
         else:
